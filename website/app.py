@@ -484,6 +484,18 @@ def api_admin_newsletter():
 def pitch():
     return send_file(os.path.join(PUBLIC_DIR, 'pitch.html'))
 
+@app.route('/aviso-legal')
+def aviso_legal():
+    return send_file(os.path.join(PUBLIC_DIR, 'aviso-legal.html'))
+
+@app.route('/privacidad')
+def privacidad():
+    return send_file(os.path.join(PUBLIC_DIR, 'privacidad.html'))
+
+@app.route('/cookies')
+def cookies_policy():
+    return send_file(os.path.join(PUBLIC_DIR, 'cookies.html'))
+
 # ─── ROI CALCULATOR API ────────────────────────────────────────────────────────
 
 @app.route('/api/roi', methods=['POST'])
