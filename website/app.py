@@ -234,6 +234,17 @@ def public_js(filename):
 def public_img(filename):
     return send_from_directory(os.path.join(PUBLIC_DIR, 'img'), filename)
 
+@app.route('/manifest.json')
+def manifest():
+    return send_file(os.path.join(PUBLIC_DIR, 'manifest.json'), mimetype='application/manifest+json')
+
+@app.route('/sw.js')
+def service_worker():
+    response = make_response(send_file(os.path.join(PUBLIC_DIR, 'sw.js'), mimetype='application/javascript'))
+    response.headers['Service-Worker-Allowed'] = '/'
+    response.headers['Cache-Control'] = 'no-cache'
+    return response
+
 @app.route('/admin/')
 @app.route('/admin')
 def admin_index():
