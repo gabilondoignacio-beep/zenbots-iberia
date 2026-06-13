@@ -12,16 +12,16 @@
 **Cuentas a crear:**
 | Email | Uso |
 |-------|-----|
-| info@zenbots.es | Principal, contacto general |
-| ventas@zenbots.es | Equipo comercial |
-| soporte@zenbots.es | Servicio técnico |
-| facturacion@zenbots.es | Administración |
-| [tu_nombre]@zenbots.es | CEO personal |
+| info@zenbotsiberia.com | Principal, contacto general |
+| ventas@zenbotsiberia.com | Equipo comercial |
+| soporte@zenbotsiberia.com | Servicio técnico |
+| facturacion@zenbotsiberia.com | Administración |
+| [tu_nombre]@zenbotsiberia.com | CEO personal |
 
 **Pasos de configuración:**
 1. Ir a workspace.google.com → "Comenzar"
 2. Introducir nombre empresa: "Zenbots Iberia"
-3. Dominio: zenbots.es (necesitas acceso al panel DNS)
+3. Dominio: zenbotsiberia.com (necesitas acceso al panel DNS)
 4. Configurar registros DNS en tu registrador de dominio:
    - **MX Records** (para recibir emails):
      ```
@@ -36,7 +36,7 @@
    - **DKIM**: Google Workspace Admin → Apps → Gmail → Autenticación
    - **DMARC**: 
      ```
-     TXT _dmarc.zenbots.es: v=DMARC1; p=quarantine; rua=mailto:info@zenbots.es
+     TXT _dmarc.zenbotsiberia.com: v=DMARC1; p=quarantine; rua=mailto:info@zenbotsiberia.com
      ```
 5. Verificar dominio (Google te da un código TXT)
 6. Crear usuarios y cuentas
@@ -48,7 +48,7 @@
 [Nombre] | [Cargo]<br>
 <br>
 Tel: +34 910 000 000<br>
-Web: www.zenbots.es<br>
+Web: www.zenbotsiberia.com<br>
 C/ [Dirección showroom], Madrid<br>
 <br>
 <i>Robots domésticos inteligentes para tu hogar</i>
@@ -139,11 +139,11 @@ sudo systemctl enable odoo
 sudo apt install nginx -y
 ```
 
-**Configuración Nginx para erp.zenbots.es:**
+**Configuración Nginx para erp.zenbotsiberia.com:**
 ```nginx
 server {
     listen 80;
-    server_name erp.zenbots.es;
+    server_name erp.zenbotsiberia.com;
     
     location / {
         proxy_pass http://localhost:8069;
@@ -158,10 +158,10 @@ server {
 ```bash
 # SSL con Let's Encrypt
 sudo apt install certbot python3-certbot-nginx -y
-sudo certbot --nginx -d erp.zenbots.es
+sudo certbot --nginx -d erp.zenbotsiberia.com
 ```
 
-**Acceso al ERP:** https://erp.zenbots.es (admin / ZenbotsAdmin2024!)
+**Acceso al ERP:** https://erp.zenbotsiberia.com (admin / ZenbotsAdmin2024!)
 
 ---
 
@@ -194,7 +194,7 @@ sudo certbot --nginx -d erp.zenbots.es
 - Dirección: C/ Alcalá 50, 2ºA, 28014 Madrid
 - Divisa: EUR
 - Logo: subir logo ZENBOTS
-- Email: info@zenbots.es
+- Email: info@zenbotsiberia.com
 - Teléfono: +34 910 000 000
 
 **Paso 2: Plan contable español**

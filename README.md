@@ -1,13 +1,13 @@
 # 🤖 ZENBOTS IBERIA S.L.
 
-**Distribución de robots domésticos inteligentes para Madrid**  
+**Distribución de robots domésticos inteligentes en España**  
 Robots de asistencia para personas mayores · Limpieza avanzada · Jardín autónomo
 
 ---
 
 ## ¿Qué es esto?
 
-Proyecto empresarial completo de una startup de distribución de robots domésticos chinos con certificación CE en Madrid, enfocada en el nicho de asistencia para personas mayores. Incluye web corporativa, panel ERP, documentación de negocio y pitch de inversión.
+Proyecto empresarial completo de una startup de distribución de robots domésticos chinos con certificación CE en España, con sede en Madrid, enfocada en el nicho de asistencia para personas mayores. Incluye web corporativa, panel ERP, documentación de negocio y pitch de inversión.
 
 **Inversión:** €82.000 · **Break-even:** Mes 5 · **Revenue Y3:** €1,4M · **Margen bruto:** 69%
 
@@ -79,14 +79,14 @@ Para enviar emails a proveedores y clientes:
 
 2. Edita `website/.env` con tus credenciales:
    ```env
-   SMTP_HOST=smtp.gmail.com
+   SMTP_HOST=smtp.zoho.eu
    SMTP_PORT=587
-   SMTP_USER=tucuenta@gmail.com
-   SMTP_PASS=xxxx xxxx xxxx xxxx   # App password de Gmail
-   FROM_EMAIL=info@zenbots.es
+   SMTP_USER=info@zenbotsiberia.com
+   SMTP_PASS=tu_contraseña_zoho
+   FROM_EMAIL=info@zenbotsiberia.com
    ```
 
-3. Para Gmail: activa verificación en 2 pasos → [Contraseñas de aplicación](https://myaccount.google.com/apppasswords)
+3. Email empresarial: `info@zenbotsiberia.com` via Zoho Mail (ver `crear-email-empresarial.command`)
 
 ---
 

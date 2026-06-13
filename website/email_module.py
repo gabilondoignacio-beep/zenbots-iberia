@@ -134,7 +134,7 @@ Best regards,
 
 CEO | ZENBOTS IBERIA S.L.
 C/ Alcalá 50, 2ºA · 28014 Madrid, Spain
-Tel: +34 910 000 000 | info@zenbotsiberia.com | www.zenbots.es
+Tel: +34 910 000 000 | info@zenbotsiberia.com | www.zenbotsiberia.com
 Company Registration: ZENBOTS IBERIA S.L. (Spain)
 
 ---
@@ -175,7 +175,7 @@ Please let us know your availability this week.
 
 Best regards,
 CEO | ZENBOTS IBERIA S.L.
-info@zenbotsiberia.com | +34 910 000 000 | www.zenbots.es""",
+info@zenbotsiberia.com | +34 910 000 000 | www.zenbotsiberia.com""",
     },
 
     'narwal': {
@@ -212,7 +212,7 @@ Please send us your authorized dealer application form and pricing schedule.
 
 Best regards,
 ZENBOTS IBERIA S.L.
-info@zenbotsiberia.com | +34 910 000 000 | www.zenbots.es
+info@zenbotsiberia.com | +34 910 000 000 | www.zenbotsiberia.com
 Madrid, Spain""",
     },
 
@@ -281,7 +281,7 @@ We look forward to joining your dealer network.
 
 Best regards,
 ZENBOTS IBERIA S.L.
-info@zenbotsiberia.com | +34 910 000 000 | www.zenbots.es
+info@zenbotsiberia.com | +34 910 000 000 | www.zenbotsiberia.com
 Madrid, Spain
 
 P.S. We would also like to discuss any co-marketing opportunities for the Spanish launch.""",
@@ -319,7 +319,7 @@ def template_welcome_lead(name, product_interest=''):
     📍 Zona Chamberí, Madrid &nbsp;·&nbsp; ☎️ +34 910 000 000 &nbsp;·&nbsp; L-V 9:00-18:00
   </p>
 </div>
-<a href="https://www.zenbots.es"
+<a href="https://www.zenbotsiberia.com"
    style="display:inline-block;background:#00C9A7;color:#0A1628;font-weight:700;font-size:15px;padding:14px 28px;border-radius:8px;text-decoration:none">
   Ver todos los robots →
 </a>"""

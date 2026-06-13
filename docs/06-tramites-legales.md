@@ -160,7 +160,7 @@
 **Importante:** Registrar ANTES de lanzar la marca públicamente  
 
 ### Registro de dominio
-- **zenbots.es** en Nominalia o Arsys: ~€10/año
+- **zenbotsiberia.com** en Nominalia o Arsys: ~€10/año
 - Registrar también: zenbots.com (por si alguien se adelanta)
 - Hacer en semana 1, simultáneamente a nombre de empresa
 

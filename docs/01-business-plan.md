@@ -9,8 +9,8 @@
 **Razón social:** ZENBOTS IBERIA S.L.  
 **Domicilio social:** Calle de Alcalá 50, 2ºA, 28014 Madrid  
 **Objeto social:** Comercialización, importación, instalación y mantenimiento de robots domésticos inteligentes  
-**Web:** www.zenbots.es  
-**Email:** info@zenbots.es  
+**Web:** www.zenbotsiberia.com  
+**Email:** info@zenbotsiberia.com  
 **Teléfono:** +34 910 000 000  
 **Fecha de constitución prevista:** Julio 2026  
 
@@ -148,7 +148,7 @@ Ser el distribuidor de referencia de robots domésticos en la Comunidad de Madri
 4. **B2B / Proyectos** (5% revenue): Ventas a residencias
 
 ### Canales de distribución
-- **Web propia** (zenbots.es): Canal principal, margen máximo
+- **Web propia** (zenbotsiberia.com): Canal principal, margen máximo
 - **Visita comercial** a residencias y centros de día
 - **Partnerships**: Ortopedias, farmacias, centros de salud de Madrid
 - **Amazon marketplace**: Canal secundario para línea limpieza

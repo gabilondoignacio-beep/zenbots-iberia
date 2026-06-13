@@ -55,7 +55,7 @@
 ### Semana 3: Operaciones
 
 **ACCIÓN 7: Dominio y hosting web**
-- Dominio: zenbots.es (registro en Namecheap o Nominalia)
+- Dominio: zenbotsiberia.com (registro en Namecheap o Nominalia)
   - Precio: ~€10/año
   - DNS: apuntar a servidor VPS
 - Hosting: DigitalOcean Droplet Basic (~€6/mes) o Render.com (gratis tier)
@@ -65,7 +65,7 @@
 **ACCIÓN 8: Email corporativo**
 - Proveedor: Google Workspace Business Starter
 - Precio: €6/usuario/mes
-- Configurar: info@zenbots.es / ventas@zenbots.es / soporte@zenbots.es
+- Configurar: info@zenbotsiberia.com / ventas@zenbotsiberia.com / soporte@zenbotsiberia.com
 - Alternativa económica: Zoho Mail (gratis hasta 5 usuarios)
 - Ver guía completa: `09-email-erp-setup.md`
 

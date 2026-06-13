@@ -110,7 +110,7 @@ Si le interesa, podemos dejarle una unidad 30 días gratis para que compruebe el
 
 Un saludo,
 [Nombre] | ZENBOTS IBERIA
-Tel: +34 910 000 000 | info@zenbots.es
+Tel: +34 910 000 000 | info@zenbotsiberia.com
 ```
 
 ---

@@ -6,7 +6,7 @@
 ## ROL 1: SECRETARIA / ADMINISTRACIÓN
 
 ### Responsabilidades diarias
-- Atender el teléfono y email de info@zenbots.es
+- Atender el teléfono y email de info@zenbotsiberia.com
 - Gestionar agenda del CEO y del comercial
 - Registrar leads entrantes en el CRM
 - Emitir facturas en Odoo/Holded
@@ -44,7 +44,7 @@ Instalación: [FECHA Y HORA]
 En el momento de la entrega, nuestro técnico realizará la instalación 
 y la sesión de formación incluida (90 minutos aprox.).
 
-Cualquier consulta, estamos en info@zenbots.es o +34 910 000 000.
+Cualquier consulta, estamos en info@zenbotsiberia.com o +34 910 000 000.
 
 Un saludo,
 [FIRMA]
@@ -303,7 +303,7 @@ PRÓXIMO MES
 ### Gestión de crisis de reputación
 **Si hay una reseña negativa en Google:**
 1. Responder en <24h, con tono amable y profesional
-2. Template: "Estimado/a [NOMBRE], lamentamos mucho su experiencia. Nos gustaría hablar con usted personalmente para resolver la situación. Por favor, contacte con nosotros en soporte@zenbots.es o llámenos al 910 000 000. Nuestro equipo técnico tiene instrucciones de resolver cualquier incidencia en menos de 48h."
+2. Template: "Estimado/a [NOMBRE], lamentamos mucho su experiencia. Nos gustaría hablar con usted personalmente para resolver la situación. Por favor, contacte con nosotros en soporte@zenbotsiberia.com o llámenos al 910 000 000. Nuestro equipo técnico tiene instrucciones de resolver cualquier incidencia en menos de 48h."
 3. Intentar resolverlo offline y pedir que actualice la reseña
 4. Nunca: ponerse a la defensiva, borrar comentarios, acusar al cliente
 
