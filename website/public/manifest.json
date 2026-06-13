@@ -1,0 +1,56 @@
+{
+  "name": "ZENBOTS IBERIA — Robots domésticos inteligentes",
+  "short_name": "ZENBOTS",
+  "description": "Robots domésticos para personas mayores y hogar en Madrid",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#0A1628",
+  "theme_color": "#00C9A7",
+  "orientation": "any",
+  "scope": "/",
+  "lang": "es",
+  "categories": ["shopping", "lifestyle"],
+  "icons": [
+    {
+      "src": "/img/icon-72.png",
+      "sizes": "72x72",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/img/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/img/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "Solicitar demo",
+      "short_name": "Demo",
+      "url": "/#contacto",
+      "icons": [{ "src": "/img/icon-192.png", "sizes": "192x192" }]
+    },
+    {
+      "name": "Ver productos",
+      "short_name": "Productos",
+      "url": "/#productos",
+      "icons": [{ "src": "/img/icon-192.png", "sizes": "192x192" }]
+    }
+  ],
+  "screenshots": [
+    {
+      "src": "/img/screenshot-wide.png",
+      "sizes": "1280x720",
+      "type": "image/png",
+      "form_factor": "wide",
+      "label": "ZENBOTS IBERIA — Página principal"
+    }
+  ]
+}

@@ -1,0 +1,610 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1"/>
+  <title>ZENBOTS IBERIA — Investment Pitch 2026</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800;900&display=swap" rel="stylesheet"/>
+  <style>
+    :root {
+      --navy:#0A1628; --navy2:#162040; --teal:#00C9A7; --teal2:#00A388;
+      --orange:#FF6B35; --white:#fff; --gray:#94A3B8; --light:#F0F4F8;
+    }
+    *{box-sizing:border-box;margin:0;padding:0}
+    html{scroll-behavior:smooth}
+    body{font-family:'Inter',sans-serif;background:var(--navy);color:var(--white);line-height:1.6}
+
+    /* ── LAYOUT ── */
+    .slide{min-height:100vh;display:flex;flex-direction:column;justify-content:center;padding:80px 8vw;position:relative;overflow:hidden;border-bottom:1px solid rgba(255,255,255,.06)}
+    .slide--light{background:var(--light);color:var(--navy)}
+    .slide--teal{background:linear-gradient(135deg,var(--teal2) 0%,#00876e 100%);color:var(--navy)}
+    .container{max-width:1100px;width:100%;margin:0 auto}
+
+    /* ── TYPOGRAPHY ── */
+    .tag{display:inline-block;padding:5px 14px;border-radius:100px;font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;margin-bottom:16px}
+    .tag--teal{background:rgba(0,201,167,.15);color:var(--teal);border:1px solid rgba(0,201,167,.25)}
+    .tag--navy{background:rgba(10,22,40,.1);color:var(--navy2)}
+    .tag--orange{background:rgba(255,107,53,.15);color:var(--orange)}
+    h1.hero-title{font-size:clamp(40px,6vw,80px);font-weight:900;line-height:1.0;letter-spacing:-.04em}
+    h2.slide-title{font-size:clamp(28px,4vw,52px);font-weight:800;line-height:1.1;letter-spacing:-.03em;margin-bottom:16px}
+    .subtitle{font-size:18px;color:rgba(255,255,255,.6);max-width:580px;line-height:1.7;margin-bottom:40px}
+    .subtitle--dark{color:rgba(10,22,40,.6)}
+
+    /* ── COVER ── */
+    .cover-grid{display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center}
+    .cover-badge{display:inline-flex;align-items:center;gap:8px;padding:8px 16px;background:rgba(0,201,167,.1);border:1px solid rgba(0,201,167,.2);border-radius:100px;font-size:13px;color:var(--teal);margin-bottom:24px}
+    .cover-badge span{width:6px;height:6px;background:var(--teal);border-radius:50%;animation:pulse 2s infinite}
+    @keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.5;transform:scale(1.4)}}
+    .cover-metrics{display:flex;flex-direction:column;gap:24px}
+    .cover-metric{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);border-radius:16px;padding:24px 28px}
+    .cover-metric__num{font-size:40px;font-weight:900;color:var(--teal);line-height:1}
+    .cover-metric__label{font-size:13px;color:rgba(255,255,255,.5);margin-top:4px}
+
+    /* ── BIG STAT GRID ── */
+    .stat-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:20px;margin:40px 0}
+    .stat-box{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);border-radius:16px;padding:28px;text-align:center}
+    .stat-box--teal{background:rgba(0,201,167,.08);border-color:rgba(0,201,167,.2)}
+    .stat-box--orange{background:rgba(255,107,53,.08);border-color:rgba(255,107,53,.2)}
+    .stat-num{font-size:42px;font-weight:900;color:var(--teal);line-height:1}
+    .stat-num--orange{color:var(--orange)}
+    .stat-num--white{color:var(--white)}
+    .stat-label{font-size:13px;color:var(--gray);margin-top:6px;font-weight:500}
+
+    /* ── PROBLEM / SOLUTION ── */
+    .two-col{display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:start;margin-top:40px}
+    .pain-card{background:rgba(239,68,68,.06);border:1px solid rgba(239,68,68,.2);border-radius:16px;padding:28px}
+    .pain-card h3{font-size:17px;font-weight:700;color:#FCA5A5;margin-bottom:12px}
+    .pain-list{list-style:none;display:flex;flex-direction:column;gap:10px}
+    .pain-list li{display:flex;gap:10px;font-size:14px;color:rgba(255,255,255,.7)}
+    .pain-list li::before{content:'✗';color:#EF4444;font-weight:700;flex-shrink:0;margin-top:1px}
+    .sol-card{background:rgba(0,201,167,.06);border:1px solid rgba(0,201,167,.2);border-radius:16px;padding:28px}
+    .sol-card h3{font-size:17px;font-weight:700;color:var(--teal);margin-bottom:12px}
+    .sol-list{list-style:none;display:flex;flex-direction:column;gap:10px}
+    .sol-list li{display:flex;gap:10px;font-size:14px;color:rgba(255,255,255,.7)}
+    .sol-list li::before{content:'✓';color:var(--teal);font-weight:700;flex-shrink:0;margin-top:1px}
+
+    /* ── MARKET ── */
+    .market-funnel{display:flex;flex-direction:column;align-items:center;gap:0;margin:40px 0}
+    .funnel-level{display:flex;flex-direction:column;align-items:center;text-align:center}
+    .funnel-bar{border-radius:8px;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:16px;width:100%}
+    .funnel-bar--tam{background:rgba(59,130,246,.15);border:1px solid rgba(59,130,246,.3);max-width:700px;padding:20px}
+    .funnel-bar--sam{background:rgba(0,201,167,.1);border:1px solid rgba(0,201,167,.25);max-width:520px;padding:18px}
+    .funnel-bar--som{background:rgba(255,107,53,.1);border:1px solid rgba(255,107,53,.3);max-width:340px;padding:16px}
+    .funnel-connector{width:2px;height:16px;background:rgba(255,255,255,.15);margin:0 auto}
+    .funnel-label{font-size:13px;color:var(--gray);margin-top:6px}
+    .funnel-num{font-size:20px;font-weight:800;color:var(--white)}
+    .funnel-desc{font-size:12px;color:var(--gray);margin-top:2px}
+
+    /* ── PRODUCTS GRID ── */
+    .products-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:36px}
+    .product-pill{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.1);border-radius:14px;padding:20px}
+    .product-pill:first-child{background:rgba(0,201,167,.08);border-color:rgba(0,201,167,.25)}
+    .product-pill__name{font-size:15px;font-weight:700;margin-bottom:4px}
+    .product-pill__price{font-size:24px;font-weight:900;color:var(--teal)}
+    .product-pill__margin{font-size:12px;color:var(--gray);margin-top:2px}
+    .product-pill__badge{display:inline-block;margin-top:8px;padding:3px 10px;background:var(--orange);color:var(--white);font-size:10px;font-weight:700;border-radius:100px}
+
+    /* ── FINANCIALS ── */
+    .financial-table{width:100%;border-collapse:collapse;margin-top:32px}
+    .financial-table th{background:rgba(255,255,255,.06);padding:12px 16px;text-align:left;font-size:12px;font-weight:700;color:var(--gray);text-transform:uppercase;letter-spacing:.06em}
+    .financial-table td{padding:14px 16px;border-bottom:1px solid rgba(255,255,255,.06);font-size:14px;color:rgba(255,255,255,.8)}
+    .financial-table tr:last-child td{border-bottom:none;font-weight:800;color:var(--teal);font-size:16px}
+    .financial-table .highlight{color:var(--teal);font-weight:700}
+    .financial-table .highlight-orange{color:var(--orange);font-weight:700}
+
+    /* ── CHART BARS ── */
+    .revenue-chart{margin-top:32px}
+    .chart-row{display:flex;align-items:center;gap:16px;margin-bottom:14px}
+    .chart-label{width:60px;font-size:13px;color:var(--gray);flex-shrink:0;text-align:right}
+    .chart-track{flex:1;height:32px;background:rgba(255,255,255,.05);border-radius:6px;overflow:hidden;position:relative}
+    .chart-fill{height:100%;border-radius:6px;display:flex;align-items:center;padding-left:14px;font-size:13px;font-weight:700;color:var(--navy)}
+    .chart-fill--1{background:rgba(0,201,167,.4);width:20%}
+    .chart-fill--2{background:rgba(0,201,167,.6);width:55%}
+    .chart-fill--3{background:var(--teal);width:100%}
+
+    /* ── TEAM ── */
+    .team-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:20px;margin-top:36px}
+    .team-card{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);border-radius:16px;padding:24px;text-align:center}
+    .team-avatar{width:56px;height:56px;background:linear-gradient(135deg,var(--teal),var(--teal2));border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:20px;font-weight:800;color:var(--navy);margin:0 auto 12px}
+    .team-name{font-size:15px;font-weight:700}
+    .team-role{font-size:13px;color:var(--gray);margin-top:4px}
+    .team-bg{font-size:12px;color:rgba(255,255,255,.5);margin-top:8px;line-height:1.5}
+
+    /* ── ASK ── */
+    .ask-grid{display:grid;grid-template-columns:1fr 1fr;gap:32px;margin-top:40px}
+    .ask-box{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.1);border-radius:16px;padding:28px}
+    .ask-title{font-size:13px;color:var(--gray);font-weight:700;text-transform:uppercase;letter-spacing:.08em;margin-bottom:12px}
+    .ask-amount{font-size:48px;font-weight:900;color:var(--teal);line-height:1}
+    .use-list{list-style:none;margin-top:16px;display:flex;flex-direction:column;gap:10px}
+    .use-list li{display:flex;justify-content:space-between;font-size:14px;padding-bottom:8px;border-bottom:1px solid rgba(255,255,255,.06)}
+    .use-list li span:last-child{color:var(--teal);font-weight:700}
+
+    /* ── TRACTION ── */
+    .milestone-list{list-style:none;margin-top:32px;position:relative;padding-left:24px}
+    .milestone-list::before{content:'';position:absolute;left:6px;top:8px;bottom:8px;width:2px;background:linear-gradient(to bottom,var(--teal),rgba(0,201,167,.1))}
+    .milestone-list li{position:relative;margin-bottom:20px;padding-left:20px}
+    .milestone-list li::before{content:'';position:absolute;left:-18px;top:6px;width:10px;height:10px;border-radius:50%;background:var(--teal);border:2px solid var(--navy2)}
+    .milestone-date{font-size:11px;color:var(--teal);font-weight:700;text-transform:uppercase;letter-spacing:.06em}
+    .milestone-text{font-size:14px;color:rgba(255,255,255,.8);margin-top:2px}
+
+    /* ── NAV ── */
+    .pitch-nav{position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(10,22,40,.95);backdrop-filter:blur(12px);border-bottom:1px solid rgba(255,255,255,.08);padding:0 40px;display:flex;align-items:center;justify-content:space-between;height:56px}
+    .pitch-nav__logo{font-size:18px;font-weight:900}
+    .pitch-nav__logo span{color:var(--teal)}
+    .pitch-nav__links{display:flex;gap:24px}
+    .pitch-nav__link{font-size:12px;color:rgba(255,255,255,.5);text-decoration:none;font-weight:500;transition:.2s}
+    .pitch-nav__link:hover{color:var(--teal)}
+    .pitch-nav__cta{background:var(--teal);color:var(--navy);padding:8px 18px;border-radius:6px;font-size:13px;font-weight:700;text-decoration:none}
+
+    /* ── SLIDE NUMBERS ── */
+    .slide-num{position:absolute;top:28px;right:40px;font-size:11px;color:rgba(255,255,255,.2);font-weight:600;letter-spacing:.1em}
+
+    /* ── BG DECOR ── */
+    .orb{position:absolute;border-radius:50%;filter:blur(80px);opacity:.15;pointer-events:none}
+    .orb--1{width:500px;height:500px;background:var(--teal);top:-150px;right:-100px}
+    .orb--2{width:300px;height:300px;background:#3B82F6;bottom:-100px;left:-80px}
+
+    /* ── DIVIDER ── */
+    .divider{height:1px;background:linear-gradient(90deg,transparent,rgba(255,255,255,.08),transparent);margin:32px 0}
+
+    /* ── PRINT ── */
+    .print-btn{position:fixed;bottom:28px;right:28px;background:var(--teal);color:var(--navy);border:none;padding:12px 22px;border-radius:8px;font-size:13px;font-weight:700;cursor:pointer;font-family:inherit;z-index:200;box-shadow:0 8px 24px rgba(0,201,167,.3)}
+    .print-btn:hover{background:var(--teal2)}
+    @media print{.pitch-nav,.print-btn{display:none}.slide{page-break-after:always;min-height:auto;padding:48px 60px}}
+
+    @media(max-width:768px){
+      .cover-grid,.two-col,.ask-grid{grid-template-columns:1fr}
+      .products-grid{grid-template-columns:1fr 1fr}
+      .pitch-nav__links{display:none}
+      .slide{padding:70px 24px}
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="pitch-nav">
+  <div class="pitch-nav__logo">ZEN<span>BOTS</span> <span style="font-size:10px;color:rgba(255,255,255,.3);font-weight:500">IBERIA</span></div>
+  <div class="pitch-nav__links">
+    <a href="#problema" class="pitch-nav__link">Problema</a>
+    <a href="#mercado" class="pitch-nav__link">Mercado</a>
+    <a href="#producto" class="pitch-nav__link">Producto</a>
+    <a href="#financiero" class="pitch-nav__link">Financiero</a>
+    <a href="#ask" class="pitch-nav__link">La petición</a>
+  </div>
+  <a href="mailto:info@zenbots.es" class="pitch-nav__cta">Contactar</a>
+</nav>
+
+<!-- SLIDE 1 — COVER -->
+<section class="slide" id="cover" style="padding-top:120px">
+  <div class="orb orb--1"></div>
+  <div class="orb orb--2"></div>
+  <div class="container">
+    <div class="cover-grid">
+      <div>
+        <div class="cover-badge"><span></span> Ronda Pre-Seed · Junio 2026</div>
+        <h1 class="hero-title">El robot que cuida<br><span style="color:var(--teal)">a tu familia.</span></h1>
+        <p class="subtitle">Distribuidores especializados de robots domésticos de asistencia para personas mayores en Madrid. El único player enfocado en el nicho de mayor crecimiento en España.</p>
+        <div style="display:flex;gap:16px;flex-wrap:wrap">
+          <a href="#ask" style="background:var(--teal);color:var(--navy);padding:14px 28px;border-radius:8px;font-weight:700;font-size:15px;text-decoration:none">Ver la propuesta →</a>
+          <a href="mailto:info@zenbots.es" style="border:2px solid rgba(255,255,255,.2);color:rgba(255,255,255,.7);padding:14px 28px;border-radius:8px;font-weight:600;font-size:15px;text-decoration:none">Contactar</a>
+        </div>
+      </div>
+      <div class="cover-metrics">
+        <div class="cover-metric">
+          <div class="cover-metric__num">€82K</div>
+          <div class="cover-metric__label">Inversión total necesaria</div>
+        </div>
+        <div class="cover-metric">
+          <div class="cover-metric__num" style="color:var(--orange)">69%</div>
+          <div class="cover-metric__label">Margen bruto sobre PVP</div>
+        </div>
+        <div class="cover-metric">
+          <div class="cover-metric__num">€1,4M</div>
+          <div class="cover-metric__label">Revenue proyectado Año 3</div>
+        </div>
+        <div class="cover-metric" style="background:rgba(0,201,167,.06);border-color:rgba(0,201,167,.2)">
+          <div class="cover-metric__num">Mes 5</div>
+          <div class="cover-metric__label">Break-even operativo</div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="slide-num">01 / 10</div>
+</section>
+
+<!-- SLIDE 2 — PROBLEMA -->
+<section class="slide" id="problema">
+  <div class="container">
+    <div class="tag tag--teal">El problema</div>
+    <h2 class="slide-title">España envejece.<br>Nadie tiene solución.</h2>
+    <div class="two-col">
+      <div>
+        <div class="stat-grid" style="margin:0 0 24px">
+          <div class="stat-box stat-box--orange">
+            <div class="stat-num stat-num--orange">9,5M</div>
+            <div class="stat-label">mayores de 65 en España</div>
+          </div>
+          <div class="stat-box">
+            <div class="stat-num">2,5M</div>
+            <div class="stat-label">viven solos</div>
+          </div>
+        </div>
+        <div class="pain-card">
+          <h3>Los tres grandes dolores</h3>
+          <ul class="pain-list">
+            <li>Las familias no pueden vigilar a sus mayores 24h: miedo constante a caídas, olvidos, soledad.</li>
+            <li>Las residencias no encuentran personal auxiliar suficiente y los costes de RRHH suben un 8% anual.</li>
+            <li>Los propios mayores rechazan perder su independencia y no quieren "ser una carga".</li>
+          </ul>
+        </div>
+      </div>
+      <div>
+        <div class="stat-grid" style="margin:0 0 24px">
+          <div class="stat-box">
+            <div class="stat-num stat-num--white">860K</div>
+            <div class="stat-label">mayores en Madrid</div>
+          </div>
+          <div class="stat-box stat-box--teal">
+            <div class="stat-num">420+</div>
+            <div class="stat-label">residencias en Madrid</div>
+          </div>
+        </div>
+        <div class="pain-card" style="background:rgba(249,115,22,.06);border-color:rgba(249,115,22,.2)">
+          <h3 style="color:#FCD34D">El vacío del mercado</h3>
+          <ul class="pain-list">
+            <li>No existe ningún distribuidor especializado en robots asistenciales en Madrid.</li>
+            <li>Los grandes retailers (Amazon, MediaMarkt) solo venden aspiradores sin soporte local.</li>
+            <li>Los fabricantes chinos tienen el mejor producto pero cero presencia en España.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="slide-num">02 / 10</div>
+</section>
+
+<!-- SLIDE 3 — SOLUCIÓN -->
+<section class="slide" id="solucion">
+  <div class="orb orb--1" style="opacity:.1"></div>
+  <div class="container">
+    <div class="tag tag--teal">La solución</div>
+    <h2 class="slide-title">ZENBOTS:<br>el puente entre China y Madrid.</h2>
+    <p class="subtitle">Traemos robots chinos con certificación CE, los instalamos en el domicilio, damos soporte técnico en español y acompañamos al usuario durante toda la vida del producto.</p>
+    <div class="two-col">
+      <div class="sol-card">
+        <h3>Lo que hacemos diferente</h3>
+        <ul class="sol-list">
+          <li>Showroom físico en Madrid — robots en vivo, no en catálogo</li>
+          <li>Instalación a domicilio en 48h garantizadas</li>
+          <li>Formación de 90 minutos para el usuario mayor</li>
+          <li>Soporte técnico local en español (no call center chino)</li>
+          <li>Contratos de mantenimiento anual con visita técnica incluida</li>
+          <li>Gestor de cuenta B2B para residencias y empresas</li>
+        </ul>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:16px">
+        <div style="background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.1);border-radius:14px;padding:20px">
+          <div style="font-size:12px;color:var(--gray);margin-bottom:6px;text-transform:uppercase;letter-spacing:.06em">Ticket medio B2C</div>
+          <div style="font-size:36px;font-weight:900;color:var(--teal)">€2.100</div>
+        </div>
+        <div style="background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.1);border-radius:14px;padding:20px">
+          <div style="font-size:12px;color:var(--gray);margin-bottom:6px;text-transform:uppercase;letter-spacing:.06em">Ticket medio B2B residencia</div>
+          <div style="font-size:36px;font-weight:900;color:var(--orange)">€18.000</div>
+        </div>
+        <div style="background:rgba(0,201,167,.06);border:1px solid rgba(0,201,167,.2);border-radius:14px;padding:20px">
+          <div style="font-size:12px;color:var(--teal);margin-bottom:6px;text-transform:uppercase;letter-spacing:.06em">MRR mantenimiento (Año 2)</div>
+          <div style="font-size:36px;font-weight:900;color:var(--white)">€12.000</div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="slide-num">03 / 10</div>
+</section>
+
+<!-- SLIDE 4 — MERCADO -->
+<section class="slide" id="mercado">
+  <div class="container">
+    <div class="tag tag--teal">Tamaño de mercado</div>
+    <h2 class="slide-title">Un mercado de €380M<br>sin dueño claro.</h2>
+    <div class="market-funnel">
+      <div class="funnel-level">
+        <div class="funnel-bar funnel-bar--tam">
+          <div class="funnel-num">$22Bn</div>
+          <div class="funnel-desc">TAM — Mercado global robots domésticos 2025 · CAGR 22%</div>
+        </div>
+        <div class="funnel-label" style="margin:8px 0">▼</div>
+      </div>
+      <div class="funnel-level">
+        <div class="funnel-bar funnel-bar--sam">
+          <div class="funnel-num" style="color:var(--teal)">€380M</div>
+          <div class="funnel-desc">SAM — Mercado robots domésticos España 2025</div>
+        </div>
+        <div class="funnel-label" style="margin:8px 0">▼</div>
+      </div>
+      <div class="funnel-level">
+        <div class="funnel-bar funnel-bar--som">
+          <div class="funnel-num" style="color:var(--orange)">€1,2M</div>
+          <div class="funnel-desc">SOM — Madrid, Año 1</div>
+        </div>
+      </div>
+    </div>
+    <div class="stat-grid" style="margin-top:32px">
+      <div class="stat-box">
+        <div class="stat-num">+34%</div>
+        <div class="stat-label">Crecimiento ventas robots España 2024</div>
+      </div>
+      <div class="stat-box stat-box--teal">
+        <div class="stat-num">7.500</div>
+        <div class="stat-label">Residencias en toda España</div>
+      </div>
+      <div class="stat-box">
+        <div class="stat-num">0</div>
+        <div class="stat-label">Competidores especializados en Madrid</div>
+      </div>
+      <div class="stat-box stat-box--orange">
+        <div class="stat-num stat-num--orange">2050</div>
+        <div class="stat-label">30% de España tendrá >65 años</div>
+      </div>
+    </div>
+  </div>
+  <div class="slide-num">04 / 10</div>
+</section>
+
+<!-- SLIDE 5 — PRODUCTO -->
+<section class="slide" id="producto">
+  <div class="orb orb--2" style="opacity:.1"></div>
+  <div class="container">
+    <div class="tag tag--teal">Catálogo de productos</div>
+    <h2 class="slide-title">5 robots.<br>69% de margen.</h2>
+    <div class="products-grid">
+      <div class="product-pill">
+        <div class="product-pill__name">ZenAssist Pro</div>
+        <div style="font-size:11px;color:var(--teal);margin-bottom:6px;font-weight:600">ASISTENCIA · FLAGSHIP</div>
+        <div class="product-pill__price">€4.499</div>
+        <div class="product-pill__margin">Coste €1.380 · Margen 69%</div>
+        <div class="product-pill__badge">MÁS VENDIDO</div>
+      </div>
+      <div class="product-pill">
+        <div class="product-pill__name">ZenCompañía</div>
+        <div style="font-size:11px;color:var(--gray);margin-bottom:6px;font-weight:600">ASISTENCIA · IA</div>
+        <div class="product-pill__price">€2.999</div>
+        <div class="product-pill__margin">Coste €920 · Margen 69%</div>
+      </div>
+      <div class="product-pill">
+        <div class="product-pill__name">ZenClean X1 Ultra</div>
+        <div style="font-size:11px;color:var(--gray);margin-bottom:6px;font-weight:600">LIMPIEZA · PREMIUM</div>
+        <div class="product-pill__price">€899</div>
+        <div class="product-pill__margin">Coste €275 · Margen 69%</div>
+      </div>
+      <div class="product-pill">
+        <div class="product-pill__name">ZenClean Pro</div>
+        <div style="font-size:11px;color:var(--gray);margin-bottom:6px;font-weight:600">LIMPIEZA · PRO</div>
+        <div class="product-pill__price">€1.199</div>
+        <div class="product-pill__margin">Coste €365 · Margen 69%</div>
+      </div>
+      <div class="product-pill">
+        <div class="product-pill__name">ZenJardín Eco</div>
+        <div style="font-size:11px;color:var(--gray);margin-bottom:6px;font-weight:600">JARDÍN · GPS RTK</div>
+        <div class="product-pill__price">€1.499</div>
+        <div class="product-pill__margin">Coste €460 · Margen 69%</div>
+      </div>
+      <div class="product-pill" style="background:rgba(255,255,255,.02);display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center">
+        <div style="font-size:28px;margin-bottom:8px">+</div>
+        <div style="font-size:13px;color:var(--gray)">ZenCare Plus<br>€199/año MRR</div>
+      </div>
+    </div>
+  </div>
+  <div class="slide-num">05 / 10</div>
+</section>
+
+<!-- SLIDE 6 — MODELO DE NEGOCIO -->
+<section class="slide" id="modelo">
+  <div class="container">
+    <div class="tag tag--teal">Modelo de negocio</div>
+    <h2 class="slide-title">4 fuentes de ingresos.<br>Ingresos recurrentes desde mes 3.</h2>
+    <div style="display:grid;grid-template-columns:repeat(2,1fr);gap:16px;margin-top:36px">
+      <div style="background:rgba(0,201,167,.08);border:1px solid rgba(0,201,167,.2);border-radius:16px;padding:24px">
+        <div style="font-size:32px;font-weight:900;color:var(--teal)">70%</div>
+        <div style="font-size:15px;font-weight:700;margin-top:4px">Venta hardware</div>
+        <div style="font-size:13px;color:var(--gray);margin-top:6px">Robots con margen ~69%. Canal web + showroom + B2B.</div>
+      </div>
+      <div style="background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);border-radius:16px;padding:24px">
+        <div style="font-size:32px;font-weight:900;color:var(--white)">15%</div>
+        <div style="font-size:15px;font-weight:700;margin-top:4px">Mantenimiento MRR</div>
+        <div style="font-size:13px;color:var(--gray);margin-top:6px">€199/año por robot. Ingresos predecibles y recurrentes.</div>
+      </div>
+      <div style="background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);border-radius:16px;padding:24px">
+        <div style="font-size:32px;font-weight:900;color:var(--orange)">10%</div>
+        <div style="font-size:15px;font-weight:700;margin-top:4px">Servicios (instalación + formación)</div>
+        <div style="font-size:13px;color:var(--gray);margin-top:6px">€99 instalación + €79 formación. Margen &gt;80%.</div>
+      </div>
+      <div style="background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);border-radius:16px;padding:24px">
+        <div style="font-size:32px;font-weight:900;color:var(--white)">5%</div>
+        <div style="font-size:15px;font-weight:700;margin-top:4px">Proyectos B2B</div>
+        <div style="font-size:13px;color:var(--gray);margin-top:6px">Packs para residencias €8K–€25K. Alto ticket y largo LTV.</div>
+      </div>
+    </div>
+    <div class="divider"></div>
+    <div style="display:flex;gap:32px;flex-wrap:wrap">
+      <div><span style="font-size:13px;color:var(--gray)">CAC objetivo</span><br><span style="font-size:24px;font-weight:800;color:var(--teal)">€150</span></div>
+      <div><span style="font-size:13px;color:var(--gray)">LTV cliente</span><br><span style="font-size:24px;font-weight:800;color:var(--white)">€2.200</span></div>
+      <div><span style="font-size:13px;color:var(--gray)">LTV/CAC ratio</span><br><span style="font-size:24px;font-weight:800;color:var(--orange)">14,7x</span></div>
+      <div><span style="font-size:13px;color:var(--gray)">Payback CAC</span><br><span style="font-size:24px;font-weight:800;color:var(--white)">&lt;1 mes</span></div>
+      <div><span style="font-size:13px;color:var(--gray)">Churn anual objetivo</span><br><span style="font-size:24px;font-weight:800;color:var(--teal)">&lt;5%</span></div>
+    </div>
+  </div>
+  <div class="slide-num">06 / 10</div>
+</section>
+
+<!-- SLIDE 7 — PROYECCIONES FINANCIERAS -->
+<section class="slide" id="financiero">
+  <div class="orb orb--1" style="opacity:.08"></div>
+  <div class="container">
+    <div class="tag tag--teal">Proyecciones financieras</div>
+    <h2 class="slide-title">€1,4M de revenue<br>en 3 años.</h2>
+    <div class="revenue-chart">
+      <div class="chart-row">
+        <div class="chart-label">Año 1</div>
+        <div class="chart-track">
+          <div class="chart-fill chart-fill--1">€274K</div>
+        </div>
+      </div>
+      <div class="chart-row">
+        <div class="chart-label">Año 2</div>
+        <div class="chart-track">
+          <div class="chart-fill chart-fill--2">€720K</div>
+        </div>
+      </div>
+      <div class="chart-row">
+        <div class="chart-label">Año 3</div>
+        <div class="chart-track">
+          <div class="chart-fill chart-fill--3">€1.400K</div>
+        </div>
+      </div>
+    </div>
+    <table class="financial-table">
+      <thead>
+        <tr><th>Métrica</th><th>Año 1</th><th>Año 2</th><th>Año 3</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>Revenue</td><td>€274.534</td><td>€720.000</td><td class="highlight">€1.400.000</td></tr>
+        <tr><td>Margen bruto</td><td>69%</td><td>69%</td><td>69%</td></tr>
+        <tr><td>EBITDA</td><td>€92.152</td><td>€298.284</td><td class="highlight">€592.000</td></tr>
+        <tr><td>EBITDA margin</td><td>33,6%</td><td>41,4%</td><td>42,3%</td></tr>
+        <tr><td>Clientes activos</td><td>90</td><td>280</td><td>600</td></tr>
+        <tr><td>MRR mantenimiento</td><td>€3.000</td><td>€12.000</td><td class="highlight">€28.000</td></tr>
+        <tr style="border-top:2px solid rgba(0,201,167,.3)"><td>Beneficio neto (tras IS)</td><td>—</td><td class="highlight">€200.000</td><td class="highlight">€400.000</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="slide-num">07 / 10</div>
+</section>
+
+<!-- SLIDE 8 — TRACCIÓN -->
+<section class="slide" id="traccion">
+  <div class="container">
+    <div class="tag tag--orange">Tracción y roadmap</div>
+    <h2 class="slide-title">De cero a €274K<br>en 12 meses.</h2>
+    <ul class="milestone-list">
+      <li><div class="milestone-date">Jul 2026</div><div class="milestone-text">Constitución S.L. · Web live · Email corporativo · ERP activo · Contacto con 5 fabricantes chinos iniciado</div></li>
+      <li><div class="milestone-date">Ago 2026</div><div class="milestone-text">Primer pedido a proveedor chino (€18K stock) · Firma local showroom Chamberí Madrid</div></li>
+      <li><div class="milestone-date">Sep 2026</div><div class="milestone-text">Primera venta · Inauguración showroom · Nota de prensa en medios locales Madrid</div></li>
+      <li><div class="milestone-date">Oct 2026</div><div class="milestone-text">Google Ads + Meta Ads activos · Primeras visitas B2B a residencias · 5 clientes</div></li>
+      <li><div class="milestone-date">Nov 2026</div><div class="milestone-text">Break-even operativo (mes 5) · Presencia en Feria Madrid Senior · 15 clientes</div></li>
+      <li><div class="milestone-date">Dic 2026</div><div class="milestone-text">€28.000/mes revenue · 2 contratos B2B residencias · MRR mantenimiento iniciado</div></li>
+      <li><div class="milestone-date">Mar 2027</div><div class="milestone-text">Apertura canal Amazon.es · Socio técnico para soporte avanzado · 60 clientes</div></li>
+      <li><div class="milestone-date">Jun 2027</div><div class="milestone-text">€274K revenue acumulado · 4 empleados · Negociación exclusividad con Keenon España</div></li>
+    </ul>
+  </div>
+  <div class="slide-num">08 / 10</div>
+</section>
+
+<!-- SLIDE 9 — EQUIPO -->
+<section class="slide" id="equipo">
+  <div class="orb orb--2" style="opacity:.1"></div>
+  <div class="container">
+    <div class="tag tag--teal">El equipo</div>
+    <h2 class="slide-title">Fundadores con visión<br>y ejecución.</h2>
+    <div class="team-grid">
+      <div class="team-card">
+        <div class="team-avatar">CEO</div>
+        <div class="team-name">Fundador / CEO</div>
+        <div class="team-role">Estrategia · Ventas B2B · Operaciones</div>
+        <div class="team-bg">Visión del mercado, relación con inversores y proveedores chinos, apertura de nuevos canales B2B.</div>
+      </div>
+      <div class="team-card">
+        <div class="team-avatar" style="background:linear-gradient(135deg,#3B82F6,#1D4ED8)">TEC</div>
+        <div class="team-name">Técnico-Comercial</div>
+        <div class="team-role">Instalaciones · Soporte · Demos</div>
+        <div class="team-bg">Instalación y configuración a domicilio, demos en showroom, soporte técnico post-venta y fidelización.</div>
+      </div>
+      <div class="team-card">
+        <div class="team-avatar" style="background:linear-gradient(135deg,var(--orange),#dc4f1a)">ADV</div>
+        <div class="team-name">Asesores externos</div>
+        <div class="team-role">Gestoría · Legal · Marketing</div>
+        <div class="team-bg">Gestoría especializada en pymes tech, asesoría legal mercantil y consultor de marketing digital freelance.</div>
+      </div>
+      <div class="team-card" style="border-style:dashed;background:transparent">
+        <div class="team-avatar" style="background:rgba(255,255,255,.06);color:rgba(255,255,255,.4)">+2</div>
+        <div class="team-name" style="color:rgba(255,255,255,.5)">Contrataciones Año 2</div>
+        <div class="team-role" style="color:rgba(255,255,255,.3)">Comercial B2B · Admin</div>
+        <div class="team-bg" style="color:rgba(255,255,255,.3)">Expansión del equipo con financiación de la ronda o con los beneficios del Año 1.</div>
+      </div>
+    </div>
+  </div>
+  <div class="slide-num">09 / 10</div>
+</section>
+
+<!-- SLIDE 10 — ASK -->
+<section class="slide" id="ask" style="background:linear-gradient(135deg,#0A1628 0%,#0d2347 60%,#0a1e3d 100%)">
+  <div class="orb orb--1"></div>
+  <div class="container">
+    <div class="tag tag--teal">La petición</div>
+    <h2 class="slide-title">Buscamos <span style="color:var(--teal)">€82.000</span><br>para dominar Madrid.</h2>
+    <p class="subtitle">Combinación de capital propio, préstamo ICO y subvención Comunidad de Madrid. Buscamos un co-inversor estratégico para completar la ronda.</p>
+    <div class="ask-grid">
+      <div class="ask-box">
+        <div class="ask-title">Inversión total</div>
+        <div class="ask-amount">€82.000</div>
+        <ul class="use-list">
+          <li><span>Stock inicial robots</span><span>€28.000</span></li>
+          <li><span>Local + showroom Madrid</span><span>€10.000</span></li>
+          <li><span>Marketing lanzamiento</span><span>€12.000</span></li>
+          <li><span>Equipo (3 meses)</span><span>€15.000</span></li>
+          <li><span>Legal + ERP + tech</span><span>€5.000</span></li>
+          <li><span>Fondo de maniobra</span><span>€12.000</span></li>
+        </ul>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:16px">
+        <div class="ask-box">
+          <div class="ask-title">Estructura de la ronda</div>
+          <div style="display:flex;flex-direction:column;gap:10px;margin-top:12px">
+            <div style="display:flex;justify-content:space-between;font-size:14px">
+              <span style="color:var(--gray)">Capital propio fundador</span>
+              <span style="color:var(--white);font-weight:700">€30.000</span>
+            </div>
+            <div style="display:flex;justify-content:space-between;font-size:14px">
+              <span style="color:var(--gray)">Préstamo ICO Emprendedores</span>
+              <span style="color:var(--white);font-weight:700">€30.000</span>
+            </div>
+            <div style="display:flex;justify-content:space-between;font-size:14px">
+              <span style="color:var(--gray)">Subvención CM (PICE)</span>
+              <span style="color:var(--teal);font-weight:700">€10.000</span>
+            </div>
+            <div style="display:flex;justify-content:space-between;font-size:14px;border-top:1px solid rgba(255,255,255,.1);padding-top:10px">
+              <span style="color:var(--gray)">Co-inversor / Business Angel</span>
+              <span style="color:var(--orange);font-weight:800">€12.000</span>
+            </div>
+          </div>
+        </div>
+        <div class="ask-box" style="background:rgba(0,201,167,.08);border-color:rgba(0,201,167,.2)">
+          <div class="ask-title" style="color:var(--teal)">Lo que ofrece ZENBOTS</div>
+          <ul class="sol-list" style="margin-top:8px">
+            <li>Participación en equity negociable (5-8%)</li>
+            <li>ROI estimado Año 3: 5-8x sobre inversión</li>
+            <li>Primer derecho de participación en ronda seed</li>
+            <li>Acceso a reporting mensual y board meetings</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="divider" style="margin:40px 0 24px"></div>
+    <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:16px">
+      <div>
+        <div style="font-size:14px;color:var(--gray)">¿Te interesa? Hablemos.</div>
+        <div style="font-size:20px;font-weight:700;color:var(--white);margin-top:4px">info@zenbots.es · +34 910 000 000</div>
+      </div>
+      <div style="display:flex;gap:12px">
+        <a href="mailto:info@zenbots.es?subject=Interés inversor ZENBOTS IBERIA" style="background:var(--teal);color:var(--navy);padding:14px 24px;border-radius:8px;font-weight:700;text-decoration:none">Contactar ahora →</a>
+        <a href="/" style="border:2px solid rgba(255,255,255,.2);color:rgba(255,255,255,.7);padding:14px 24px;border-radius:8px;font-weight:600;text-decoration:none">Ver web</a>
+      </div>
+    </div>
+  </div>
+  <div class="slide-num">10 / 10</div>
+</section>
+
+<button class="print-btn" onclick="window.print()">⬇ Descargar PDF</button>
+
+</body>
+</html>

@@ -1,0 +1,28 @@
+#!/bin/bash
+PROJECT="/Users/ignaciogabilondo/Documents/claude project/zenbots-iberia/website"
+
+# Kill previous server
+lsof -ti :3000 | xargs kill -9 2>/dev/null
+sleep 0.3
+
+# Check if server is running
+if lsof -ti :3000 &>/dev/null; then
+  open "http://localhost:3000"
+  exit 0
+fi
+
+# Start server in background terminal
+osascript <<ASEOF
+tell application "Terminal"
+  activate
+  do script "cd \"$PROJECT\" && echo '🤖 ZENBOTS IBERIA — Servidor iniciando…' && python3 app.py; echo ''; echo 'Servidor detenido. Cierra esta ventana.'"
+  delay 2
+  set windowList to every window
+  set frontWindow to item 1 of windowList
+  set custom title of frontWindow to "ZENBOTS IBERIA — Servidor"
+end tell
+ASEOF
+
+# Open browser after 3 seconds
+sleep 3
+open "http://localhost:3000"
