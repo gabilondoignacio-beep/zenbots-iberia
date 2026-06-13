@@ -14,7 +14,7 @@ SMTP_HOST = os.environ.get('SMTP_HOST', 'smtp.gmail.com')
 SMTP_PORT = int(os.environ.get('SMTP_PORT', 587))
 SMTP_USER = os.environ.get('SMTP_USER', '')
 SMTP_PASS = os.environ.get('SMTP_PASS', '')
-FROM_EMAIL = os.environ.get('FROM_EMAIL', 'info@zenbots.es')
+FROM_EMAIL = os.environ.get('FROM_EMAIL', 'info@zenbotsiberia.com')
 FROM_NAME = os.environ.get('FROM_NAME', 'ZENBOTS IBERIA')
 COMPANY_PHONE = os.environ.get('COMPANY_PHONE', '+34 910 000 000')
 COMPANY_ADDRESS = os.environ.get('COMPANY_ADDRESS', 'Calle de Alcalá 50, 2ºA, 28014 Madrid')
@@ -134,7 +134,7 @@ Best regards,
 
 CEO | ZENBOTS IBERIA S.L.
 C/ Alcalá 50, 2ºA · 28014 Madrid, Spain
-Tel: +34 910 000 000 | info@zenbots.es | www.zenbots.es
+Tel: +34 910 000 000 | info@zenbotsiberia.com | www.zenbots.es
 Company Registration: ZENBOTS IBERIA S.L. (Spain)
 
 ---
@@ -175,7 +175,7 @@ Please let us know your availability this week.
 
 Best regards,
 CEO | ZENBOTS IBERIA S.L.
-info@zenbots.es | +34 910 000 000 | www.zenbots.es""",
+info@zenbotsiberia.com | +34 910 000 000 | www.zenbots.es""",
     },
 
     'narwal': {
@@ -212,7 +212,7 @@ Please send us your authorized dealer application form and pricing schedule.
 
 Best regards,
 ZENBOTS IBERIA S.L.
-info@zenbots.es | +34 910 000 000 | www.zenbots.es
+info@zenbotsiberia.com | +34 910 000 000 | www.zenbots.es
 Madrid, Spain""",
     },
 
@@ -248,7 +248,7 @@ We are ready to move quickly — our showroom opens in September 2026.
 Kind regards,
 ZENBOTS IBERIA S.L.
 C/ Alcalá 50, 28014 Madrid, Spain
-info@zenbots.es | +34 910 000 000""",
+info@zenbotsiberia.com | +34 910 000 000""",
     },
 
     'segway': {
@@ -281,7 +281,7 @@ We look forward to joining your dealer network.
 
 Best regards,
 ZENBOTS IBERIA S.L.
-info@zenbots.es | +34 910 000 000 | www.zenbots.es
+info@zenbotsiberia.com | +34 910 000 000 | www.zenbots.es
 Madrid, Spain
 
 P.S. We would also like to discuss any co-marketing opportunities for the Spanish launch.""",

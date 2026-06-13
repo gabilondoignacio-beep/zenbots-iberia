@@ -537,7 +537,7 @@ window.showSmtpHelp = () => {
 SMTP_PORT=587
 SMTP_USER=tucuenta@gmail.com
 SMTP_PASS=xxxx xxxx xxxx xxxx
-FROM_EMAIL=info@zenbots.es
+FROM_EMAIL=info@zenbotsiberia.com
 FROM_NAME=ZENBOTS IBERIA</pre>
       <p><strong>Para Gmail:</strong> activa verificación en 2 pasos → <a href="https://myaccount.google.com/security" target="_blank" style="color:#00C9A7">myaccount.google.com/security</a> → "Contraseñas de aplicación"</p>
       <p><strong>Alternativa gratuita:</strong> Brevo (antes SendinBlue) — 300 emails/día gratis</p>
