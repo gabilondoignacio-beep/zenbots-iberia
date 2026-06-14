@@ -1,0 +1,12 @@
+[build]
+builder = "nixpacks"
+
+[deploy]
+startCommand = "gunicorn --chdir website app:app --bind 0.0.0.0:$PORT --workers 2 --timeout 120"
+healthcheckPath = "/api/products"
+healthcheckTimeout = 300
+restartPolicyType = "on_failure"
+
+[environments.production.variables]
+PORT = "8080"
+ADMIN_TOKEN = "ZenbotsAdmin2024!"

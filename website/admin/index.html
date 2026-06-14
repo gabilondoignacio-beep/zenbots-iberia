@@ -51,7 +51,16 @@
         <svg viewBox="0 0 24 24"><path fill="currentColor" d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 14.5v-9l6 4.5-6 4.5z"/></svg>
         Newsletter
       </a>
-      <div class="sidebar__section-label">PROVEEDORES &amp; FINANZAS</div>
+      <div class="sidebar__section-label">FINANZAS</div>
+      <a href="#expenses" class="sidebar__link" data-page="expenses">
+        <svg viewBox="0 0 24 24"><path fill="currentColor" d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 14H4v-7h16v7zm0-11H4V6h16v1z"/></svg>
+        Gastos &amp; Cashflow
+      </a>
+      <a href="#reports" class="sidebar__link" data-page="reports">
+        <svg viewBox="0 0 24 24"><path fill="currentColor" d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-7 14l-5-5 1.41-1.41L12 14.17l7.59-7.59L21 8l-9 9z"/></svg>
+        Informes financieros
+      </a>
+      <div class="sidebar__section-label">PROVEEDORES</div>
       <a href="#emails" class="sidebar__link" data-page="emails">
         <svg viewBox="0 0 24 24"><path fill="currentColor" d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
         Bandeja de correo
@@ -60,10 +69,6 @@
       <a href="#suppliers" class="sidebar__link" data-page="suppliers">
         <svg viewBox="0 0 24 24"><path fill="currentColor" d="M20 8h-3V4H3c-1.1 0-2 .9-2 2v11h2c0 1.66 1.34 3 3 3s3-1.34 3-3h6c0 1.66 1.34 3 3 3s3-1.34 3-3h2v-5l-3-4zM6 18.5c-.83 0-1.5-.67-1.5-1.5s.67-1.5 1.5-1.5 1.5.67 1.5 1.5-.67 1.5-1.5 1.5zm13.5-9l1.96 2.5H17V9.5h2.5zm-1.5 9c-.83 0-1.5-.67-1.5-1.5s.67-1.5 1.5-1.5 1.5.67 1.5 1.5-.67 1.5-1.5 1.5z"/></svg>
         Proveedores
-      </a>
-      <a href="#reports" class="sidebar__link" data-page="reports">
-        <svg viewBox="0 0 24 24"><path fill="currentColor" d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-7 14l-5-5 1.41-1.41L12 14.17l7.59-7.59L21 8l-9 9z"/></svg>
-        Informes financieros
       </a>
     </nav>
     <div class="sidebar__footer">
@@ -369,12 +374,89 @@
         </div>
       </div>
 
+      <!-- EXPENSES PAGE -->
+      <div class="page" id="page-expenses">
+        <div class="stats-grid" style="margin-bottom:20px">
+          <div class="stat-card"><div class="stat-card__icon stat-card__icon--green"><svg viewBox="0 0 24 24" width="24" height="24"><path fill="currentColor" d="M11.8 10.9c-2.27-.59-3-1.2-3-2.15 0-1.09 1.01-1.85 2.7-1.85 1.78 0 2.44.85 2.5 2.1h2.21c-.07-1.72-1.12-3.3-3.21-3.81V3h-3v2.16c-1.94.42-3.5 1.68-3.5 3.61 0 2.31 1.91 3.46 4.7 4.13 2.5.6 3 1.48 3 2.41 0 .69-.49 1.79-2.7 1.79-2.06 0-2.87-.92-2.98-2.1h-2.2c.12 2.19 1.76 3.42 3.68 3.83V21h3v-2.15c1.95-.37 3.5-1.5 3.5-3.55 0-2.84-2.43-3.81-4.7-4.4z"/></svg></div><div class="stat-card__content"><div class="stat-card__num" id="exp-total">—</div><div class="stat-card__label">Total gastos</div></div></div>
+          <div class="stat-card"><div class="stat-card__icon stat-card__icon--teal"><svg viewBox="0 0 24 24" width="24" height="24"><path fill="currentColor" d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2z"/></svg></div><div class="stat-card__content"><div class="stat-card__num" id="exp-count">—</div><div class="stat-card__label">Nº de gastos</div></div></div>
+          <div class="stat-card"><div class="stat-card__icon stat-card__icon--purple"><svg viewBox="0 0 24 24" width="24" height="24"><path fill="currentColor" d="M20 6h-2.18c.07-.44.18-.88.18-1.33C18 2.51 16.49 1 14.67 1c-1.52 0-2.72.64-3.56 1.81L12 4.11l-.9-1.2C10.3 1.64 9.1 1 7.33 1 5.51 1 4 2.51 4 4.67c0 .44.09.88.18 1.33H2v14h20V6zm-5.33-3c.74 0 1.33.6 1.33 1.33 0 .77-.29 1.45-.91 2.22L12 10.6 8.91 6.55C8.27 7.75 8 6.77 8 6c0-.74.6-1.33 1.33-1.33.54 0 .97.3 1.26.72L12 7.32l1.41-1.93c.29-.42.72-.72 1.26-.72z"/></svg></div><div class="stat-card__content"><div class="stat-card__num" id="exp-top-cat">—</div><div class="stat-card__label">Cat. principal</div></div></div>
+          <div class="stat-card"><div class="stat-card__icon stat-card__icon--blue"><svg viewBox="0 0 24 24" width="24" height="24"><path fill="currentColor" d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-7 14l-5-5 1.41-1.41L12 14.17l7.59-7.59L21 8l-9 9z"/></svg></div><div class="stat-card__content"><div class="stat-card__num" id="exp-net">—</div><div class="stat-card__label">Resultado neto</div></div></div>
+        </div>
+        <div class="erp-card" style="margin-bottom:16px">
+          <div class="erp-card__header">
+            <h2 class="erp-card__title">Registrar gasto</h2>
+          </div>
+          <div class="erp-card__body">
+            <form id="expenseForm" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:12px;align-items:end">
+              <div>
+                <label style="display:block;font-size:.8rem;color:#94A3B8;margin-bottom:4px">Fecha *</label>
+                <input type="date" id="expDate" class="erp-input" required />
+              </div>
+              <div>
+                <label style="display:block;font-size:.8rem;color:#94A3B8;margin-bottom:4px">Categoría *</label>
+                <select id="expCategory" class="erp-select" required>
+                  <option value="">— elegir —</option>
+                  <option value="alquiler">Alquiler local</option>
+                  <option value="publicidad">Publicidad & Marketing</option>
+                  <option value="proveedor">Pago a proveedor</option>
+                  <option value="personal">Personal</option>
+                  <option value="transporte">Transporte & Logística</option>
+                  <option value="tecnologia">Tecnología & Software</option>
+                  <option value="legal">Legal & Asesoría</option>
+                  <option value="otros">Otros</option>
+                </select>
+              </div>
+              <div style="grid-column:span 2">
+                <label style="display:block;font-size:.8rem;color:#94A3B8;margin-bottom:4px">Descripción *</label>
+                <input type="text" id="expDesc" class="erp-input" placeholder="Ej: Mes octubre alquiler Chamberí" required />
+              </div>
+              <div>
+                <label style="display:block;font-size:.8rem;color:#94A3B8;margin-bottom:4px">Importe (€) *</label>
+                <input type="number" id="expAmount" class="erp-input" step="0.01" min="0" placeholder="0.00" required />
+              </div>
+              <div>
+                <label style="display:block;font-size:.8rem;color:#94A3B8;margin-bottom:4px">Forma de pago</label>
+                <select id="expPayment" class="erp-select">
+                  <option value="transferencia">Transferencia</option>
+                  <option value="tarjeta">Tarjeta</option>
+                  <option value="efectivo">Efectivo</option>
+                  <option value="domiciliacion">Domiciliación</option>
+                </select>
+              </div>
+              <div>
+                <button type="submit" class="btn-erp btn-erp--primary" style="width:100%;height:38px">+ Añadir gasto</button>
+              </div>
+            </form>
+          </div>
+        </div>
+        <div class="dashboard-grid">
+          <div class="erp-card" style="grid-column:span 2">
+            <div class="erp-card__header">
+              <h2 class="erp-card__title">Listado de gastos</h2>
+              <a class="btn-erp btn-erp--sm btn-erp--ghost" href="/api/admin/export/expenses?token=ZenbotsAdmin2024!">⬇ CSV</a>
+            </div>
+            <div class="erp-card__body">
+              <div class="table-wrapper">
+                <table class="erp-table">
+                  <thead><tr><th>Fecha</th><th>Categoría</th><th>Descripción</th><th>Importe</th><th>Pago</th><th></th></tr></thead>
+                  <tbody id="expensesBody"><tr><td colspan="6" class="table-loading">Cargando…</td></tr></tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+          <div class="erp-card">
+            <div class="erp-card__header"><h2 class="erp-card__title">Gastos por categoría</h2></div>
+            <div class="erp-card__body" id="expByCategory">Cargando…</div>
+          </div>
+        </div>
+      </div>
+
       <!-- REPORTS PAGE -->
       <div class="page" id="page-reports">
         <div class="stats-grid" style="margin-bottom:20px" id="reportsSummary">
           <div class="stat-card"><div class="stat-card__icon stat-card__icon--green"><svg viewBox="0 0 24 24" width="24" height="24"><path fill="currentColor" d="M11.8 10.9c-2.27-.59-3-1.2-3-2.15 0-1.09 1.01-1.85 2.7-1.85 1.78 0 2.44.85 2.5 2.1h2.21c-.07-1.72-1.12-3.3-3.21-3.81V3h-3v2.16c-1.94.42-3.5 1.68-3.5 3.61 0 2.31 1.91 3.46 4.7 4.13 2.5.6 3 1.48 3 2.41 0 .69-.49 1.79-2.7 1.79-2.06 0-2.87-.92-2.98-2.1h-2.2c.12 2.19 1.76 3.42 3.68 3.83V21h3v-2.15c1.95-.37 3.5-1.5 3.5-3.55 0-2.84-2.43-3.81-4.7-4.4z"/></svg></div><div class="stat-card__content"><div class="stat-card__num" id="rep-revenue">—</div><div class="stat-card__label">Revenue total</div></div></div>
-          <div class="stat-card"><div class="stat-card__icon stat-card__icon--teal"><svg viewBox="0 0 24 24" width="24" height="24"><path fill="currentColor" d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-7 14l-5-5 1.41-1.41L12 14.17l7.59-7.59L21 8l-9 9z"/></svg></div><div class="stat-card__content"><div class="stat-card__num" id="rep-orders">—</div><div class="stat-card__label">Pedidos cobrados</div></div></div>
-          <div class="stat-card"><div class="stat-card__icon stat-card__icon--purple"><svg viewBox="0 0 24 24" width="24" height="24"><path fill="currentColor" d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 14.5v-9l6 4.5-6 4.5z"/></svg></div><div class="stat-card__content"><div class="stat-card__num" id="rep-avg">—</div><div class="stat-card__label">Ticket medio</div></div></div>
+          <div class="stat-card"><div class="stat-card__icon stat-card__icon--red" style="background:rgba(220,38,38,.15)"><svg viewBox="0 0 24 24" width="24" height="24"><path fill="#DC2626" d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 14H4v-7h16v7zm0-11H4V6h16v1z"/></svg></div><div class="stat-card__content"><div class="stat-card__num" id="rep-expenses">—</div><div class="stat-card__label">Total gastos</div></div></div>
+          <div class="stat-card"><div class="stat-card__icon stat-card__icon--teal"><svg viewBox="0 0 24 24" width="24" height="24"><path fill="currentColor" d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-7 14l-5-5 1.41-1.41L12 14.17l7.59-7.59L21 8l-9 9z"/></svg></div><div class="stat-card__content"><div class="stat-card__num" id="rep-net">—</div><div class="stat-card__label">Resultado neto</div></div></div>
           <div class="stat-card"><div class="stat-card__icon stat-card__icon--blue"><svg viewBox="0 0 24 24" width="24" height="24"><path fill="currentColor" d="M16 11c1.66 0 2.99-1.34 2.99-3S17.66 5 16 5c-1.66 0-3 1.34-3 3s1.34 3 3 3zm-8 0c1.66 0 2.99-1.34 2.99-3S9.66 5 8 5C6.34 5 5 6.34 5 8s1.34 3 3 3z"/></svg></div><div class="stat-card__content"><div class="stat-card__num" id="rep-customers">—</div><div class="stat-card__label">Clientes totales</div></div></div>
         </div>
         <div class="dashboard-grid">
@@ -394,13 +476,14 @@
         </div>
         <div class="erp-card" style="margin-top:16px">
           <div class="erp-card__header">
-            <h2 class="erp-card__title">Revenue mensual (últimos 12 meses)</h2>
+            <h2 class="erp-card__title">Cashflow mensual — Ingresos vs Gastos</h2>
+            <a class="btn-erp btn-erp--sm btn-erp--ghost" href="#expenses" data-page="expenses">+ Añadir gasto</a>
           </div>
           <div class="erp-card__body">
             <div class="table-wrapper">
               <table class="erp-table" id="monthlyRevenueTable">
-                <thead><tr><th>Mes</th><th>Pedidos</th><th>Revenue</th><th>Margen bruto est.</th></tr></thead>
-                <tbody id="monthlyRevenueBody"><tr><td colspan="4" class="table-loading">Cargando…</td></tr></tbody>
+                <thead><tr><th>Mes</th><th>Pedidos</th><th>Ingresos</th><th>Gastos</th><th>Margen bruto</th><th>Resultado neto</th></tr></thead>
+                <tbody id="monthlyRevenueBody"><tr><td colspan="6" class="table-loading">Cargando…</td></tr></tbody>
               </table>
             </div>
           </div>

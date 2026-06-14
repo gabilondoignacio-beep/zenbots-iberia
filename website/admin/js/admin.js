@@ -34,6 +34,7 @@ const PAGE_TITLES = {
   newsletter: 'Newsletter',
   emails: 'Bandeja de correo',
   suppliers: 'Proveedores',
+  expenses: 'Gastos & Cashflow',
   reports: 'Informes financieros',
 };
 
@@ -619,10 +620,6 @@ window.saveSupplierNotes = async (id) => {
 async function loadReports() {
   try {
     const r = await api('/api/admin/reports/financial');
-    document.getElementById('rep-revenue').textContent = eur(r.summary.total_revenue);
-    document.getElementById('rep-orders').textContent = r.summary.total_orders;
-    document.getElementById('rep-avg').textContent = eur(r.summary.avg_ticket);
-    document.getElementById('rep-customers').textContent = r.summary.total_customers;
 
     // By product bar chart
     const byProd = document.getElementById('repByProduct');
@@ -658,21 +655,128 @@ async function loadReports() {
         </div>`).join('')}</div>`;
     }
 
-    // Monthly revenue table
+    // Summary KPIs
+    document.getElementById('rep-revenue').textContent = eur(r.summary.total_revenue);
+    document.getElementById('rep-expenses').textContent = eur(r.summary.total_expenses);
+    const netEl = document.getElementById('rep-net');
+    netEl.textContent = eur(r.summary.net_result);
+    netEl.style.color = r.summary.net_result >= 0 ? '#16A34A' : '#DC2626';
+    document.getElementById('rep-customers').textContent = r.summary.total_customers;
+
+    // Cashflow monthly table
     const monthBody = document.getElementById('monthlyRevenueBody');
-    if (!r.monthly?.length) { monthBody.innerHTML = '<tr><td colspan="4" class="table-loading">Sin datos</td></tr>'; }
+    if (!r.monthly?.length) { monthBody.innerHTML = '<tr><td colspan="6" class="table-loading">Sin datos</td></tr>'; }
     else {
-      monthBody.innerHTML = r.monthly.map(m => `
+      monthBody.innerHTML = r.monthly.map(m => {
+        const net = m.net;
+        return `
         <tr>
           <td><strong>${m.month}</strong></td>
           <td>${m.orders}</td>
-          <td><strong>${eur(m.revenue)}</strong></td>
-          <td style="color:#16A34A">${eur(m.gross_margin)}</td>
-        </tr>
-      `).join('');
+          <td style="color:#16A34A"><strong>${eur(m.revenue)}</strong></td>
+          <td style="color:#DC2626">${eur(m.expenses)}</td>
+          <td style="color:#94A3B8">${eur(m.gross_margin)}</td>
+          <td style="color:${net>=0?'#16A34A':'#DC2626'};font-weight:600">${eur(net)}</td>
+        </tr>`;
+      }).join('');
     }
   } catch(err) { console.error('Reports error:', err); }
 }
+
+// ===== GASTOS & CASHFLOW =====
+async function loadExpenses() {
+  try {
+    const rows = await api('/api/admin/expenses');
+    const total = rows.reduce((s, r) => s + r.amount, 0);
+    document.getElementById('exp-total').textContent = eur(total);
+    document.getElementById('exp-count').textContent = rows.length;
+
+    // Top category
+    const catMap = {};
+    rows.forEach(r => { catMap[r.category] = (catMap[r.category] || 0) + r.amount; });
+    const topCat = Object.entries(catMap).sort((a,b) => b[1]-a[1])[0];
+    document.getElementById('exp-top-cat').textContent = topCat ? topCat[0] : '—';
+
+    // Net (need revenue from reports API too)
+    try {
+      const rep = await api('/api/admin/reports/financial');
+      const netEl = document.getElementById('exp-net');
+      netEl.textContent = eur(rep.summary.net_result);
+      netEl.style.color = rep.summary.net_result >= 0 ? '#16A34A' : '#DC2626';
+    } catch(_) {}
+
+    // Expense list
+    const body = document.getElementById('expensesBody');
+    if (!rows.length) {
+      body.innerHTML = '<tr><td colspan="6" class="table-loading">Sin gastos registrados aún</td></tr>';
+    } else {
+      body.innerHTML = rows.map(r => `
+        <tr>
+          <td>${r.date}</td>
+          <td><span class="status-badge">${r.category}</span></td>
+          <td>${r.description}</td>
+          <td style="font-weight:600;color:#DC2626">${eur(r.amount)}</td>
+          <td style="color:#94A3B8">${r.payment_method}</td>
+          <td><button class="btn-erp btn-erp--sm btn-erp--danger" onclick="deleteExpense(${r.id})">✕</button></td>
+        </tr>`).join('');
+    }
+
+    // By category bar chart
+    const catEl = document.getElementById('expByCategory');
+    const cats = Object.entries(catMap).sort((a,b) => b[1]-a[1]);
+    if (!cats.length) {
+      catEl.innerHTML = '<p style="padding:20px;color:#94A3B8;text-align:center">Sin datos</p>';
+    } else {
+      const max = Math.max(...cats.map(c=>c[1]), 1);
+      catEl.innerHTML = `<div class="mini-bar-chart">${cats.map(([cat, val]) => `
+        <div class="mini-bar">
+          <div class="mini-bar__label">
+            <span class="mini-bar__name">${cat}</span>
+            <span class="mini-bar__value">${eur(val)}</span>
+          </div>
+          <div class="mini-bar__track">
+            <div class="mini-bar__fill" style="width:${(val/max*100).toFixed(0)}%;background:#DC2626"></div>
+          </div>
+        </div>`).join('')}</div>`;
+    }
+  } catch(err) { console.error('Expenses error:', err); }
+}
+
+window.deleteExpense = async function(id) {
+  if (!confirm('¿Eliminar este gasto?')) return;
+  try {
+    await api(`/api/admin/expenses/${id}`, { method: 'DELETE' });
+    loadExpenses();
+  } catch(e) { alert('Error al eliminar'); }
+};
+
+document.getElementById('expenseForm')?.addEventListener('submit', async function(e) {
+  e.preventDefault();
+  const btn = e.target.querySelector('[type=submit]');
+  btn.textContent = 'Guardando…'; btn.disabled = true;
+  try {
+    await api('/api/admin/expenses', {
+      method: 'POST',
+      body: JSON.stringify({
+        date: document.getElementById('expDate').value,
+        category: document.getElementById('expCategory').value,
+        description: document.getElementById('expDesc').value,
+        amount: document.getElementById('expAmount').value,
+        payment_method: document.getElementById('expPayment').value,
+      }),
+    });
+    e.target.reset();
+    document.getElementById('expDate').value = new Date().toISOString().slice(0,10);
+    loadExpenses();
+  } catch(err) { alert('Error al guardar'); }
+  finally { btn.textContent = '+ Añadir gasto'; btn.disabled = false; }
+});
+
+// Set today's date as default on expense form
+(function() {
+  const dateEl = document.getElementById('expDate');
+  if (dateEl) dateEl.value = new Date().toISOString().slice(0,10);
+})();
 
 // ===== PAGE LOADERS =====
 const loaders = {
@@ -685,6 +789,7 @@ const loaders = {
   newsletter: loadNewsletter,
   emails: loadEmails,
   suppliers: loadSuppliers,
+  expenses: loadExpenses,
   reports: loadReports,
 };
 

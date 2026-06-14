@@ -164,6 +164,17 @@ def init_db():
                 notes TEXT,
                 created_at DATETIME DEFAULT CURRENT_TIMESTAMP
             );
+            CREATE TABLE IF NOT EXISTS expenses (
+                id INTEGER PRIMARY KEY AUTOINCREMENT,
+                date DATE NOT NULL,
+                category TEXT NOT NULL,
+                description TEXT NOT NULL,
+                amount REAL NOT NULL,
+                payment_method TEXT DEFAULT 'transferencia',
+                supplier_id INTEGER,
+                notes TEXT,
+                created_at DATETIME DEFAULT CURRENT_TIMESTAMP
+            );
         """)
         # Seed products
         count = db.execute('SELECT COUNT(*) FROM products').fetchone()[0]
@@ -626,6 +637,51 @@ def api_admin_suppliers_update(sid):
         db.commit()
     return jsonify({'success': True})
 
+# ─── EXPENSES (GASTOS) ─────────────────────────────────────────────────────────
+
+@app.route('/api/admin/expenses', methods=['GET', 'POST'])
+def api_expenses():
+    require_admin()
+    if request.method == 'GET':
+        month = request.args.get('month')
+        category = request.args.get('category')
+        q = 'SELECT * FROM expenses'
+        params, where = [], []
+        if month:
+            where.append("strftime('%Y-%m', date) = ?")
+            params.append(month)
+        if category:
+            where.append('category = ?')
+            params.append(category)
+        if where:
+            q += ' WHERE ' + ' AND '.join(where)
+        q += ' ORDER BY date DESC'
+        with get_db() as db:
+            rows = rows_to_list(db.execute(q, params).fetchall())
+        return jsonify(rows)
+
+    d = request.get_json() or {}
+    required = ['date', 'category', 'description', 'amount']
+    if not all(d.get(k) for k in required):
+        return jsonify({'error': 'Campos requeridos: date, category, description, amount'}), 400
+    with get_db() as db:
+        cur = db.execute(
+            'INSERT INTO expenses (date,category,description,amount,payment_method,supplier_id,notes) VALUES (?,?,?,?,?,?,?)',
+            (d['date'], d['category'], d['description'], float(d['amount']),
+             d.get('payment_method', 'transferencia'), d.get('supplier_id'), d.get('notes'))
+        )
+        db.commit()
+        eid = cur.lastrowid
+    return jsonify({'success': True, 'id': eid}), 201
+
+@app.route('/api/admin/expenses/<int:eid>', methods=['DELETE'])
+def api_expense_delete(eid):
+    require_admin()
+    with get_db() as db:
+        db.execute('DELETE FROM expenses WHERE id=?', (eid,))
+        db.commit()
+    return jsonify({'success': True})
+
 # ─── FINANCIAL REPORTS ─────────────────────────────────────────────────────────
 
 @app.route('/api/admin/reports/financial', methods=['GET'])
@@ -633,7 +689,7 @@ def api_reports_financial():
     require_admin()
     with get_db() as db:
         def scalar(q, *a): return db.execute(q, a).fetchone()[0]
-        monthly = rows_to_list(db.execute("""
+        monthly_income = rows_to_list(db.execute("""
             SELECT strftime('%Y-%m', created_at) as month,
                    COUNT(*) as orders,
                    COALESCE(SUM(total),0) as revenue,
@@ -644,6 +700,33 @@ def api_reports_financial():
             ORDER BY month DESC
             LIMIT 12
         """).fetchall())
+        monthly_expenses = rows_to_list(db.execute("""
+            SELECT strftime('%Y-%m', date) as month,
+                   COALESCE(SUM(amount),0) as expenses
+            FROM expenses
+            GROUP BY month
+            ORDER BY month DESC
+            LIMIT 12
+        """).fetchall())
+        # Build cashflow merging income and expenses by month
+        all_months = sorted(set(
+            [r['month'] for r in monthly_income] + [r['month'] for r in monthly_expenses]
+        ), reverse=True)[:12]
+        income_map = {r['month']: r for r in monthly_income}
+        expense_map = {r['month']: r['expenses'] for r in monthly_expenses}
+        cashflow = []
+        for m in all_months:
+            inc = income_map.get(m, {})
+            exp = expense_map.get(m, 0)
+            revenue = inc.get('revenue', 0)
+            cashflow.append({
+                'month': m,
+                'orders': inc.get('orders', 0),
+                'revenue': revenue,
+                'gross_margin': inc.get('gross_margin', 0),
+                'expenses': exp,
+                'net': round(revenue - exp, 2),
+            })
         by_product = rows_to_list(db.execute("""
             SELECT p.name, p.category, p.price_retail, p.price_cost,
                    COUNT(o.id) as units_sold,
@@ -655,13 +738,22 @@ def api_reports_financial():
         contacts_conversion = rows_to_list(db.execute("""
             SELECT status, COUNT(*) as n FROM contacts GROUP BY status ORDER BY n DESC
         """).fetchall())
+        expenses_by_cat = rows_to_list(db.execute("""
+            SELECT category, COALESCE(SUM(amount),0) as total, COUNT(*) as n
+            FROM expenses GROUP BY category ORDER BY total DESC
+        """).fetchall())
+        total_expenses = scalar("SELECT COALESCE(SUM(amount),0) FROM expenses")
+        total_revenue = scalar("SELECT COALESCE(SUM(total),0) FROM orders WHERE status NOT IN ('cancelado')")
 
     return jsonify({
-        'monthly': monthly,
+        'monthly': cashflow,
         'by_product': by_product,
         'contacts_conversion': contacts_conversion,
+        'expenses_by_cat': expenses_by_cat,
         'summary': {
-            'total_revenue': scalar("SELECT COALESCE(SUM(total),0) FROM orders WHERE status NOT IN ('cancelado')"),
+            'total_revenue': total_revenue,
+            'total_expenses': total_expenses,
+            'net_result': round(total_revenue - total_expenses, 2),
             'avg_ticket': scalar("SELECT COALESCE(AVG(total),0) FROM orders WHERE status NOT IN ('cancelado')"),
             'total_orders': scalar("SELECT COUNT(*) FROM orders WHERE status NOT IN ('cancelado')"),
             'total_customers': scalar("SELECT COUNT(*) FROM customers"),
@@ -681,6 +773,7 @@ def api_export(table):
         'newsletter': 'SELECT id,email,active,created_at FROM newsletter ORDER BY created_at DESC',
         'inventory': 'SELECT sku,name,category,price_retail,price_cost,stock,active FROM products ORDER BY category,name',
         'suppliers': 'SELECT * FROM suppliers ORDER BY name',
+        'expenses': 'SELECT id,date,category,description,amount,payment_method,notes,created_at FROM expenses ORDER BY date DESC',
     }
     if table not in allowed:
         return jsonify({'error': 'Tabla no permitida'}), 400
