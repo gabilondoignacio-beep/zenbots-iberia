@@ -838,9 +838,10 @@ def _send_welcome_email(name, email, product_interest):
         pass
 
 # ─── BOOT ─────────────────────────────────────────────────────────────────────
+# Always initialize DB — runs whether started via python3 app.py or gunicorn
+init_db()
 
 if __name__ == '__main__':
-    init_db()
     print("""
   ██████╗ ███████╗███╗   ██╗██████╗  ██████╗ ████████╗███████╗
   ╚════██╗██╔════╝████╗  ██║██╔══██╗██╔═══██╗╚══██╔══╝██╔════╝
